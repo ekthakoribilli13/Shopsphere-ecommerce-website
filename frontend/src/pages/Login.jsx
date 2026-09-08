@@ -1,24 +1,20 @@
 import { useState } from "react";
 
 function Login({ onLogin, onGoToSignup }) {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event) => {
-
         event.preventDefault();
 
         setError("");
         setLoading(true);
 
         try {
-
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${import.meta.env.VITE_API_URL}/api/auth/login`,
                 {
                     method: "POST",
 
@@ -53,19 +49,13 @@ function Login({ onLogin, onGoToSignup }) {
             onLogin(data);
 
         } catch (error) {
-
             setError(error.message);
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
-
     return (
-
         <div className="auth-page">
 
             <div className="auth-card">
@@ -80,15 +70,11 @@ function Login({ onLogin, onGoToSignup }) {
 
                 </div>
 
-
                 {error && (
-
                     <div className="auth-error">
                         {error}
                     </div>
-
                 )}
-
 
                 <form onSubmit={handleSubmit}>
 
@@ -108,7 +94,6 @@ function Login({ onLogin, onGoToSignup }) {
 
                     </div>
 
-
                     <div className="form-group">
 
                         <label>Password</label>
@@ -125,7 +110,6 @@ function Login({ onLogin, onGoToSignup }) {
 
                     </div>
 
-
                     <button
                         type="submit"
                         className="auth-submit-button"
@@ -138,16 +122,13 @@ function Login({ onLogin, onGoToSignup }) {
 
                 </form>
 
-
                 <div className="auth-switch">
 
                     <span>
                         Don't have an account?
                     </span>
 
-                    <button
-                        onClick={onGoToSignup}
-                    >
+                    <button onClick={onGoToSignup}>
                         Create Account
                     </button>
 
@@ -156,9 +137,7 @@ function Login({ onLogin, onGoToSignup }) {
             </div>
 
         </div>
-
     );
 }
 
 export default Login;
-

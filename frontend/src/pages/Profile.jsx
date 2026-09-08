@@ -11,14 +11,17 @@ function Profile({ onBack, onLogout }) {
                 const token = localStorage.getItem("token");
 
                 if (!token) {
-                    setError("Please login to view your profile.");
+                    setError(
+                        "Please login to view your profile."
+                    );
                     return;
                 }
 
                 const response = await fetch(
-                    "http://localhost:5000/api/auth/profile",
+                    `${import.meta.env.VITE_API_URL}/api/auth/profile`,
                     {
                         method: "GET",
+
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -29,7 +32,8 @@ function Profile({ onBack, onLogout }) {
 
                 if (!response.ok) {
                     throw new Error(
-                        data.message || "Failed to load profile"
+                        data.message ||
+                        "Failed to load profile"
                     );
                 }
 
@@ -64,6 +68,7 @@ function Profile({ onBack, onLogout }) {
         return (
             <div className="profile-page">
                 <div className="profile-card">
+
                     <h2>Unable to load profile</h2>
 
                     <p className="profile-error">
@@ -76,6 +81,7 @@ function Profile({ onBack, onLogout }) {
                     >
                         ← Back to Shop
                     </button>
+
                 </div>
             </div>
         );
@@ -83,6 +89,7 @@ function Profile({ onBack, onLogout }) {
 
     return (
         <div className="profile-page">
+
             <div className="profile-container">
 
                 <button
@@ -101,6 +108,7 @@ function Profile({ onBack, onLogout }) {
                     </div>
 
                     <div className="profile-header">
+
                         <p className="profile-tag">
                             MY ACCOUNT
                         </p>
@@ -112,11 +120,13 @@ function Profile({ onBack, onLogout }) {
                         <p>
                             Manage your ShopSphere account.
                         </p>
+
                     </div>
 
                     <div className="profile-details">
 
                         <div className="profile-detail">
+
                             <span className="profile-detail-label">
                                 👤 Name
                             </span>
@@ -124,9 +134,11 @@ function Profile({ onBack, onLogout }) {
                             <strong>
                                 {user.name}
                             </strong>
+
                         </div>
 
                         <div className="profile-detail">
+
                             <span className="profile-detail-label">
                                 📧 Email
                             </span>
@@ -134,9 +146,11 @@ function Profile({ onBack, onLogout }) {
                             <strong>
                                 {user.email}
                             </strong>
+
                         </div>
 
                         <div className="profile-detail">
+
                             <span className="profile-detail-label">
                                 📅 Member Since
                             </span>
@@ -153,9 +167,11 @@ function Profile({ onBack, onLogout }) {
                                     }
                                 )}
                             </strong>
+
                         </div>
 
                         <div className="profile-detail">
+
                             <span className="profile-detail-label">
                                 🔐 Account Status
                             </span>
@@ -163,6 +179,7 @@ function Profile({ onBack, onLogout }) {
                             <strong className="account-active">
                                 Active
                             </strong>
+
                         </div>
 
                     </div>

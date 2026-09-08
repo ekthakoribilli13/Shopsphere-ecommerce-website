@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function OrderDetails({ orderId, onBack }) {
     const [order, setOrder] = useState(null);
@@ -11,11 +11,11 @@ function OrderDetails({ orderId, onBack }) {
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
-                    `http://localhost:5000/api/orders/${orderId}`,
+                    `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
                     {
                         headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
+                            Authorization: `Bearer ${token}`
+                        }
                     }
                 );
 
@@ -27,10 +27,11 @@ function OrderDetails({ orderId, onBack }) {
                     );
                 }
 
-                // Backend returns { message, order }
                 setOrder(data.order);
+
             } catch (err) {
                 setError(err.message);
+
             } finally {
                 setLoading(false);
             }
@@ -50,12 +51,15 @@ function OrderDetails({ orderId, onBack }) {
     if (error) {
         return (
             <div className="order-details">
+
                 <h2>Unable to load order</h2>
+
                 <p>{error}</p>
 
                 <button onClick={onBack}>
                     ← Back to My Orders
                 </button>
+
             </div>
         );
     }
@@ -63,11 +67,13 @@ function OrderDetails({ orderId, onBack }) {
     if (!order) {
         return (
             <div className="order-details">
+
                 <h2>Order not found</h2>
 
                 <button onClick={onBack}>
                     ← Back to My Orders
                 </button>
+
             </div>
         );
     }
@@ -81,7 +87,6 @@ function OrderDetails({ orderId, onBack }) {
 
             <h1>Order Details</h1>
 
-            {/* ORDER INFORMATION */}
             <div className="order-info">
 
                 <p>
@@ -99,19 +104,22 @@ function OrderDetails({ orderId, onBack }) {
                 <p>
                     <strong>Order Date:</strong>{" "}
                     {order.createdAt
-                        ? new Date(order.createdAt).toLocaleString()
+                        ? new Date(
+                            order.createdAt
+                        ).toLocaleString()
                         : "N/A"}
                 </p>
 
             </div>
 
-            {/* ORDER ITEMS */}
             <h2>Items</h2>
 
             {order.items && order.items.length > 0 ? (
+
                 <div className="order-items">
 
                     {order.items.map((item, index) => (
+
                         <div
                             className="order-item"
                             key={item._id || index}
@@ -129,7 +137,8 @@ function OrderDetails({ orderId, onBack }) {
                             </p>
 
                             <p>
-                                <strong>Price:</strong> ₹{item.price}
+                                <strong>Price:</strong>{" "}
+                                ₹{item.price}
                             </p>
 
                             <p>
@@ -138,14 +147,17 @@ function OrderDetails({ orderId, onBack }) {
                             </p>
 
                         </div>
+
                     ))}
 
                 </div>
+
             ) : (
+
                 <p>No items found.</p>
+
             )}
 
-            {/* PRICE DETAILS */}
             <h2>Price Details</h2>
 
             <div className="price-details">
@@ -167,7 +179,6 @@ function OrderDetails({ orderId, onBack }) {
 
             </div>
 
-            {/* CUSTOMER DETAILS */}
             <h2>Delivery Details</h2>
 
             <div className="customer-details">

@@ -1,19 +1,15 @@
 import { useState } from "react";
 
 function Signup({ onSignup, onGoToLogin }) {
-
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-
     const [loading, setLoading] = useState(false);
 
-
     const handleSubmit = async (event) => {
-
         event.preventDefault();
 
         setError("");
@@ -21,9 +17,8 @@ function Signup({ onSignup, onGoToLogin }) {
         setLoading(true);
 
         try {
-
             const response = await fetch(
-                "http://localhost:5000/api/auth/signup",
+                `${import.meta.env.VITE_API_URL}/api/auth/signup`,
                 {
                     method: "POST",
 
@@ -56,19 +51,13 @@ function Signup({ onSignup, onGoToLogin }) {
             }, 1000);
 
         } catch (error) {
-
             setError(error.message);
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
-
     return (
-
         <div className="auth-page">
 
             <div className="auth-card">
@@ -83,24 +72,17 @@ function Signup({ onSignup, onGoToLogin }) {
 
                 </div>
 
-
                 {error && (
-
                     <div className="auth-error">
                         {error}
                     </div>
-
                 )}
 
-
                 {success && (
-
                     <div className="auth-success">
                         {success}
                     </div>
-
                 )}
-
 
                 <form onSubmit={handleSubmit}>
 
@@ -120,7 +102,6 @@ function Signup({ onSignup, onGoToLogin }) {
 
                     </div>
 
-
                     <div className="form-group">
 
                         <label>Email</label>
@@ -136,7 +117,6 @@ function Signup({ onSignup, onGoToLogin }) {
                         />
 
                     </div>
-
 
                     <div className="form-group">
 
@@ -155,7 +135,6 @@ function Signup({ onSignup, onGoToLogin }) {
 
                     </div>
 
-
                     <button
                         type="submit"
                         className="auth-submit-button"
@@ -168,16 +147,13 @@ function Signup({ onSignup, onGoToLogin }) {
 
                 </form>
 
-
                 <div className="auth-switch">
 
                     <span>
                         Already have an account?
                     </span>
 
-                    <button
-                        onClick={onGoToLogin}
-                    >
+                    <button onClick={onGoToLogin}>
                         Login
                     </button>
 
@@ -186,9 +162,7 @@ function Signup({ onSignup, onGoToLogin }) {
             </div>
 
         </div>
-
     );
 }
 
 export default Signup;
-

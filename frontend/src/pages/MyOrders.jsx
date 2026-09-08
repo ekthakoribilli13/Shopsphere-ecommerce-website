@@ -1,30 +1,23 @@
 import { useEffect, useState } from "react";
 
 function MyOrders({ onBack, onOrderClick }) {
-
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
-
         const fetchOrders = async () => {
-
             try {
-
-                const token =
-                    localStorage.getItem("token");
+                const token = localStorage.getItem("token");
 
                 if (!token) {
-                    setError(
-                        "Please login to view your orders."
-                    );
+                    setError("Please login to view your orders.");
                     setLoading(false);
                     return;
                 }
 
                 const response = await fetch(
-                    "http://localhost:5000/api/orders/my-orders",
+                    `${import.meta.env.VITE_API_URL}/api/orders/my-orders`,
                     {
                         method: "GET",
                         headers: {
@@ -33,20 +26,17 @@ function MyOrders({ onBack, onOrderClick }) {
                     }
                 );
 
-                const data =
-                    await response.json();
+                const data = await response.json();
 
                 if (!response.ok) {
                     throw new Error(
-                        data.message ||
-                        "Failed to fetch orders"
+                        data.message || "Failed to fetch orders"
                     );
                 }
 
                 setOrders(data.orders);
 
             } catch (error) {
-
                 console.error(
                     "Fetch My Orders Error:",
                     error
@@ -55,50 +45,27 @@ function MyOrders({ onBack, onOrderClick }) {
                 setError(error.message);
 
             } finally {
-
                 setLoading(false);
-
             }
         };
 
         fetchOrders();
-
     }, []);
 
-    // =========================
-    // LOADING
-    // =========================
-
     if (loading) {
-
         return (
             <div className="my-orders-page">
-
                 <div className="my-orders-container">
-
-                    <h1>
-                        My Orders
-                    </h1>
-
-                    <p>
-                        Loading your orders...
-                    </p>
-
+                    <h1>My Orders</h1>
+                    <p>Loading your orders...</p>
                 </div>
-
             </div>
         );
     }
 
-    // =========================
-    // ERROR
-    // =========================
-
     if (error) {
-
         return (
             <div className="my-orders-page">
-
                 <div className="my-orders-container">
 
                     <button
@@ -108,29 +75,20 @@ function MyOrders({ onBack, onOrderClick }) {
                         ← Back to Shop
                     </button>
 
-                    <h1>
-                        My Orders
-                    </h1>
+                    <h1>My Orders</h1>
 
                     <div className="checkout-error">
                         {error}
                     </div>
 
                 </div>
-
             </div>
         );
     }
 
-    // =========================
-    // EMPTY ORDERS
-    // =========================
-
     if (orders.length === 0) {
-
         return (
             <div className="my-orders-page">
-
                 <div className="my-orders-container">
 
                     <button
@@ -146,9 +104,7 @@ function MyOrders({ onBack, onOrderClick }) {
                             📦
                         </div>
 
-                        <h1>
-                            No Orders Yet
-                        </h1>
+                        <h1>No Orders Yet</h1>
 
                         <p>
                             You haven't placed any orders yet.
@@ -162,16 +118,10 @@ function MyOrders({ onBack, onOrderClick }) {
                         </button>
 
                     </div>
-
                 </div>
-
             </div>
         );
     }
-
-    // =========================
-    // ORDERS LIST
-    // =========================
 
     return (
         <div className="my-orders-page">
@@ -233,7 +183,6 @@ function MyOrders({ onBack, onOrderClick }) {
                             <div className="order-card-details">
 
                                 <div>
-
                                     <span>
                                         Order Total
                                     </span>
@@ -241,11 +190,9 @@ function MyOrders({ onBack, onOrderClick }) {
                                     <strong>
                                         ₹{order.grandTotal}
                                     </strong>
-
                                 </div>
 
                                 <div>
-
                                     <span>
                                         Items
                                     </span>
@@ -253,11 +200,9 @@ function MyOrders({ onBack, onOrderClick }) {
                                     <strong>
                                         {order.items.length}
                                     </strong>
-
                                 </div>
 
                                 <div>
-
                                     <span>
                                         Customer
                                     </span>
@@ -265,7 +210,6 @@ function MyOrders({ onBack, onOrderClick }) {
                                     <strong>
                                         {order.customer.name}
                                     </strong>
-
                                 </div>
 
                             </div>
@@ -284,9 +228,7 @@ function MyOrders({ onBack, onOrderClick }) {
                     ))}
 
                 </div>
-
             </div>
-
         </div>
     );
 }

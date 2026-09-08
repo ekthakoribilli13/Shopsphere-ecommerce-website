@@ -1,16 +1,75 @@
-# React + Vite
+# 🛍️ ShopSphere – MERN E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShopSphere is a full-stack e-commerce web application developed using the MERN stack. It allows users to browse products, create an account, log in securely, manage their cart, place orders, and view their order history.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Frontend:** https://shopsphere-ecommerce-website-puce.vercel.app/
 
-## React Compiler
+**Backend:** https://shopsphere-ecommerce-website-3.onrender.com/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- User registration and login
+- JWT-based authentication
+- Password hashing using bcrypt
+- Product listing and product details
+- Add products to cart
+- Cart management
+- Checkout and order placement
+- View My Orders
+- View individual Order Details
+- User profile
+- Responsive and professional user interface
+- REST API-based backend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies Used
+
+### Frontend
+- React.js
+- Vite
+- JavaScript
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+- REST APIs
+
+### Database
+- MongoDB
+- Mongoose
+- MongoDB Atlas
+
+### Authentication
+- JSON Web Tokens (JWT)
+- bcrypt
+
+### Deployment
+- Vercel – Frontend
+- Render – Backend
+- MongoDB Atlas – Database
+
+## 📁 Project Structure
+
+```text
+ecommerce/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+│
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   ├── package.json
+│   └── ...
+│
+└── README.md
